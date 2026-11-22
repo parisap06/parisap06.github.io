@@ -1,0 +1,274 @@
+---
+import '../styles/global.css';
+// Paris Apostolidis — University of Crete Portfolio
+const name = "Paris Apostolidis";
+const university = "University of Crete";
+const description =
+  "Paris Apostolidis — Computer Science student at the University of Crete. Learning why things work, not just how to build them.";
+
+const currentDives = [
+  "C++ Programming and Principles",
+  "Computer Architecture",
+  "Linear Algebra",
+  "Discrete Mathematics"
+];
+
+// ── PROJECTS ────────────────────────────────────────────────
+// Add your real projects here. Each one becomes a card.
+// `image` is optional: put a screenshot in /public/projects/ and use "/projects/name.png".
+// Remove the placeholder entry once you add your own.
+const projects: {
+  title: string;
+  description: string;
+  tags: string[];
+  url?: string;
+  image?: string;
+  placeholder?: boolean;
+}[] = [
+  {
+    title: "Your first project",
+    description:
+      "A short description of what it does and what you learned building it. Replace this card with a real project.",
+    tags: ["C++"],
+    url: "https://github.com/parisap06",
+    placeholder: true
+  }
+];
+
+const links = [
+  { label: "GitHub", sub: "Small beginner projects", url: "https://github.com/parisap06" },
+  { label: "Instagram", sub: "Daily Life", url: "https://instagram.com/apostolidiss__" },
+  { label: "LinkedIn", sub: "Let's connect", url: "https://linkedin.com/in/apostolidisp" },
+  { label: "Email", sub: "Feel free to contact :)", url: "mailto:parisap06@gmail.com" }
+];
+
+const nav = [
+  { label: "About", href: "#about" },
+  { label: "Projects", href: "#projects" },
+  { label: "Contact", href: "#contact" }
+];
+
+const initials = name.split(" ").map((p) => p[0]).join("");
+---
+
+<html lang="en" class="dark scroll-smooth">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{name} — Portfolio</title>
+        <meta name="description" content={description} />
+        <meta name="theme-color" content="#0a0a0a" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={`${name} — Portfolio`} />
+        <meta property="og:description" content={description} />
+        <meta name="twitter:card" content="summary" />
+        <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/favicon.svg`} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+        <style>
+            body {
+                font-family: 'Inter', sans-serif;
+                background: #0a0a0a;
+                color: #fafafa;
+                margin: 0;
+                overflow-x: hidden;
+            }
+            .serif { font-family: 'Fraunces', serif; }
+
+            #bg-canvas {
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                z-index: -1; filter: blur(60px); opacity: 0.5;
+            }
+
+            section[id] { scroll-margin-top: 5rem; }
+
+            /* Scroll reveal */
+            .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
+            .reveal.in { opacity: 1; transform: none; }
+            @media (prefers-reduced-motion: reduce) {
+                .reveal { opacity: 1; transform: none; transition: none; }
+                html { scroll-behavior: auto; }
+            }
+        </style>
+    </head>
+    <body class="min-h-screen">
+        <canvas id="bg-canvas"></canvas>
+
+        <!-- Top navigation -->
+        <header class="fixed top-0 inset-x-0 z-10 backdrop-blur-md bg-black/30 border-b border-zinc-800/60">
+            <nav class="mx-auto max-w-3xl px-6 h-14 flex items-center justify-between" aria-label="Main">
+                <a href="#top" class="serif text-lg tracking-tight text-white">{initials}</a>
+                <ul class="flex gap-6 text-sm text-zinc-400">
+                    {nav.map(item => (
+                        <li><a href={item.href} class="hover:text-white transition-colors">{item.label}</a></li>
+                    ))}
+                </ul>
+            </nav>
+        </header>
+
+        <main id="top" class="mx-auto max-w-3xl px-6 pt-14">
+
+            <!-- Hero -->
+            <section class="min-h-[85vh] flex flex-col justify-center gap-6 py-24">
+                <p class="text-sm text-zinc-500 uppercase tracking-[0.3em] reveal">Portfolio</p>
+                <h1 class="text-5xl sm:text-7xl serif tracking-tight text-white reveal">{name}</h1>
+                <p class="text-zinc-400 leading-relaxed text-lg sm:text-xl max-w-xl reveal">
+                    Computer Science student at <span class="text-white underline decoration-zinc-700 underline-offset-4">{university}</span>.
+                    I spend my days learning why things work, not just how to build them.
+                </p>
+                <div class="flex flex-wrap gap-3 pt-2 reveal">
+                    <a href="#projects" class="px-5 py-2.5 rounded-full bg-white text-black text-sm font-semibold hover:bg-zinc-200 transition-colors">See my work</a>
+                    <a href="#contact" class="px-5 py-2.5 rounded-full border border-zinc-700 text-sm text-zinc-300 hover:border-zinc-400 hover:text-white transition-colors">Get in touch</a>
+                </div>
+            </section>
+
+            <!-- About -->
+            <section id="about" class="py-20 flex flex-col gap-10">
+                <h2 class="text-3xl serif tracking-tight reveal">About</h2>
+
+                <div class="flex flex-col sm:flex-row gap-10 items-start">
+                    <!--
+                        PHOTO PLACEHOLDER
+                        To add your photo later: put the file in /public (e.g. /public/me.jpg),
+                        then replace this whole <div> with:
+                        <img src="/me.jpg" alt="Paris Apostolidis" class="size-40 shrink-0 rounded-2xl object-cover" />
+                    -->
+                    <div
+                        class="size-40 shrink-0 rounded-2xl border border-dashed border-zinc-700 bg-zinc-900/60 flex items-center justify-center serif text-4xl text-zinc-600 reveal"
+                        role="img"
+                        aria-label="Photo placeholder"
+                    >{initials}</div>
+
+                    <div class="flex flex-col gap-6 reveal">
+                        <p class="text-zinc-400 leading-relaxed text-lg">
+                            I'm a Computer Science student at the {university}. I like understanding what's
+                            going on underneath, so I'm spending my time on the fundamentals: how code
+                            becomes machine behaviour, and the maths that sits behind it.
+                        </p>
+
+                        <div class="flex flex-col gap-3">
+                            <p class="text-sm text-zinc-500 italic">Currently diving into:</p>
+                            <div class="flex flex-wrap gap-2 text-sm">
+                                {currentDives.map(skill => (
+                                    <span class="px-4 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/60 shadow-sm transition-colors hover:border-zinc-700">
+                                        {skill}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects -->
+            <section id="projects" class="py-20 flex flex-col gap-10">
+                <div class="flex flex-col gap-2 reveal">
+                    <h2 class="text-3xl serif tracking-tight">Projects</h2>
+                    <p class="text-zinc-500">Small things I've built while learning.</p>
+                </div>
+
+                <ul class="grid gap-4 sm:grid-cols-2">
+                    {projects.map((project, i) => (
+                        <li class={`group relative flex flex-col gap-4 p-6 rounded-2xl border bg-black/60 transition-all duration-300 reveal ${project.placeholder ? 'border-dashed border-zinc-700/60' : 'border-zinc-700/40 hover:border-zinc-400 hover:bg-zinc-900/50'}`}>
+                            {project.image && (
+                                <img src={project.image} alt={`${project.title} screenshot`} loading="lazy" class="rounded-lg border border-zinc-800 w-full" />
+                            )}
+                            <div class="flex items-baseline justify-between">
+                                <h3 class="serif text-xl text-white">{project.title}</h3>
+                                <span class="text-xs text-zinc-600 tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+                            </div>
+                            <p class="text-zinc-400 text-sm leading-relaxed">{project.description}</p>
+                            <div class="flex flex-wrap gap-2 mt-auto pt-2">
+                                {project.tags.map(tag => (
+                                    <span class="text-[11px] px-2.5 py-1 rounded-full border border-zinc-800 text-zinc-500">{tag}</span>
+                                ))}
+                            </div>
+                            {project.url && (
+                                <a href={project.url} target="_blank" rel="noopener noreferrer" class="absolute inset-0 rounded-2xl" aria-label={`${project.title} on GitHub`}></a>
+                            )}
+                        </li>
+                    ))}
+                </ul>
+            </section>
+
+            <!-- Contact -->
+            <section id="contact" class="py-20 flex flex-col gap-10">
+                <div class="flex flex-col gap-2 reveal">
+                    <h2 class="text-3xl serif tracking-tight">Contact</h2>
+                    <p class="text-zinc-500">Want to talk, collaborate, or just say hi? Pick whatever's easiest.</p>
+                </div>
+
+                <ul class="grid grid-cols-2 gap-4 w-full">
+                    {links.map(link => (
+                        <li class="group relative p-6 rounded-2xl border border-zinc-700/40 bg-black/60 hover:border-zinc-400 hover:bg-zinc-900/50 transition-all duration-300 cursor-pointer text-center reveal">
+                            <span class="block text-zinc-400 group-hover:text-white font-medium transition-colors">
+                                {link.label}
+                            </span>
+                            <span class="text-[10px] text-zinc-600 uppercase tracking-wider group-hover:text-zinc-400 transition-colors">
+                                {link.sub}
+                            </span>
+                            <a href={link.url} target="_blank" rel="noopener noreferrer" class="absolute inset-0 rounded-2xl" aria-label={`${link.label}: ${link.sub}`}></a>
+                        </li>
+                    ))}
+                </ul>
+            </section>
+
+            <footer class="py-16 text-center text-[10px] text-zinc-600 uppercase tracking-[0.3em]">
+                Building in public. {new Date().getFullYear()} Release.
+            </footer>
+        </main>
+
+        <script>
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // ── Animated background ──
+            const canvas = document.getElementById('bg-canvas') as HTMLCanvasElement | null;
+            const ctx = canvas?.getContext('2d');
+            let time = 0;
+
+            function resize() {
+                if (!canvas) return;
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            function draw() {
+                if (!ctx || !canvas) return;
+                const shift = Math.sin(time) * 40;
+                const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+                gradient.addColorStop(0, `hsl(${225 + shift}, 55%, 14%)`);
+                gradient.addColorStop(0.5, `hsl(${285 + shift}, 45%, 9%)`);
+                gradient.addColorStop(1, `hsl(${205 + shift}, 35%, 5%)`);
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+
+            function animate() {
+                draw();
+                time += 0.004;
+                requestAnimationFrame(animate);
+            }
+
+            resize();
+            window.addEventListener('resize', () => { resize(); draw(); });
+            if (reduceMotion) draw(); else animate();
+
+            // ── Scroll reveal ──
+            const items = document.querySelectorAll<HTMLElement>('.reveal');
+            if (reduceMotion || !('IntersectionObserver' in window)) {
+                items.forEach(el => el.classList.add('in'));
+            } else {
+                const io = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('in');
+                            io.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15 });
+                items.forEach(el => io.observe(el));
+            }
+        </script>
+    </body>
+</html>
