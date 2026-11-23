@@ -1,16 +1,19 @@
 ---
 import '../styles/global.css';
+import { Github, Instagram, Linkedin } from 'simple-icons-astro';
+import { Mail } from 'lucide-astro';
 // Paris Apostolidis — University of Crete Portfolio
 const name = "Paris Apostolidis";
 const university = "University of Crete";
+const universityUrl = "https://www.csd.uoc.gr/"
 const description =
   "Paris Apostolidis — Computer Science student at the University of Crete. Learning why things work, not just how to build them.";
 
 const currentDives = [
-  "C++ Programming and Principles",
-  "Computer Architecture",
-  "Linear Algebra",
-  "Discrete Mathematics"
+  "Data Structures",
+  "Object-Oriented Programming",
+  "Probabilities",
+  "Theory of Computation"
 ];
 
 // ── PROJECTS ────────────────────────────────────────────────
@@ -36,10 +39,10 @@ const projects: {
 ];
 
 const links = [
-  { label: "GitHub", sub: "Small beginner projects", url: "https://github.com/parisap06" },
-  { label: "Instagram", sub: "Daily Life", url: "https://instagram.com/apostolidiss__" },
-  { label: "LinkedIn", sub: "Let's connect", url: "https://linkedin.com/in/apostolidisp" },
-  { label: "Email", sub: "Feel free to contact :)", url: "mailto:parisap06@gmail.com" }
+  { label: "GitHub", sub: "Small beginner projects", url: "https://github.com/parisap06", icon: Github },
+  { label: "Instagram", sub: "Daily Life", url: "https://instagram.com/apostolidiss__", icon: Instagram },
+  { label: "LinkedIn", sub: "Let's connect", url: "https://linkedin.com/in/apostolidisp", icon: Linkedin },
+  { label: "Email", sub: "Feel free to contact :)", url: "mailto:parisap06@gmail.com", icon: Mail }
 ];
 
 const nav = [
@@ -76,9 +79,40 @@ const initials = name.split(" ").map((p) => p[0]).join("");
             }
             .serif { font-family: 'Fraunces', serif; }
 
-            #bg-canvas {
-                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                z-index: -1; filter: blur(60px); opacity: 0.5;
+            
+            
+            /* INITIAL STYLE
+            /* ── Animated gradient background ──
+               Change the four colours below to restyle it. Use 6-digit hex values.
+               Make the overlay lighter/darker with the last number (0 = vivid, 1 = black). */
+            #gradient-canvas {
+                position: fixed; inset: 0; z-index: -2;
+                width: 100%; height: 100%;
+                --gradient-color-1: #1f9ea3;  /* teal */
+                --gradient-color-2: #f8bd97;  /* peach */
+                --gradient-color-3: #9e5428;  /* brown */
+                --gradient-color-4: #3b0102;  /* deep red */
+            }
+            #gradient-canvas-overlay {
+                position: fixed; inset: 0; z-index: -1;
+                background: rgba(0, 0, 0, 0.8);
+            }
+            /*
+
+            /* ── Animated gradient background ── 
+               Change the four colours below to restyle it. Use 6-digit hex values.
+               Make the overlay lighter/darker with the last number (0 = vivid, 1 = black). */
+            #gradient-canvas {
+                position: fixed; inset: 0; z-index: -2;
+                width: 100%; height: 100%;
+                --gradient-color-1: #475569;  /* slate */
+                --gradient-color-2: #94a3b8;  /* silver */
+                --gradient-color-3: #1e293b;  /* charcoal */
+                --gradient-color-4: #020617;  /* obsidian */
+            }
+            #gradient-canvas-overlay {
+                position: fixed; inset: 0; z-index: -1;
+                background: rgba(0, 0, 0, 0.7);
             }
 
             section[id] { scroll-margin-top: 5rem; }
@@ -93,7 +127,8 @@ const initials = name.split(" ").map((p) => p[0]).join("");
         </style>
     </head>
     <body class="min-h-screen">
-        <canvas id="bg-canvas"></canvas>
+        <canvas id="gradient-canvas"></canvas>
+        <div id="gradient-canvas-overlay"></div>
 
         <!-- Top navigation -->
         <header class="fixed top-0 inset-x-0 z-10 backdrop-blur-md bg-black/30 border-b border-zinc-800/60">
@@ -114,7 +149,15 @@ const initials = name.split(" ").map((p) => p[0]).join("");
                 <p class="text-sm text-zinc-500 uppercase tracking-[0.3em] reveal">Portfolio</p>
                 <h1 class="text-5xl sm:text-7xl serif tracking-tight text-white reveal">{name}</h1>
                 <p class="text-zinc-400 leading-relaxed text-lg sm:text-xl max-w-xl reveal">
-                    Computer Science student at <span class="text-white underline decoration-zinc-700 underline-offset-4">{university}</span>.
+                    Computer Science student at{' '}
+                    <a 
+                        href={universityUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        class="text-white underline decoration-zinc-700 underline-offset-4 hover:decoration-white transition-colors"
+                    >
+                        {university}
+                    </a>.
                     I spend my days learning why things work, not just how to build them.
                 </p>
                 <div class="flex flex-wrap gap-3 pt-2 reveal">
@@ -128,6 +171,7 @@ const initials = name.split(" ").map((p) => p[0]).join("");
                 <h2 class="text-3xl serif tracking-tight reveal">About</h2>
 
                 <div class="flex flex-col sm:flex-row gap-10 items-start">
+                    
                     <!--
                         PHOTO PLACEHOLDER
                         To add your photo later: put the file in /public (e.g. /public/me.jpg),
@@ -142,9 +186,17 @@ const initials = name.split(" ").map((p) => p[0]).join("");
 
                     <div class="flex flex-col gap-6 reveal">
                         <p class="text-zinc-400 leading-relaxed text-lg">
-                            I'm a Computer Science student at the {university}. I like understanding what's
+                            I'm a Computer Science student at the{' '}
+                            <a 
+                                href={universityUrl} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                class="text-zinc-200 underline decoration-zinc-700 underline-offset-4 hover:text-white hover:decoration-white transition-colors"
+                            >
+                                {university}
+                            </a>. I like understanding what's
                             going on underneath, so I'm spending my time on the fundamentals: how code
-                            becomes machine behaviour, and the maths that sits behind it.
+                            becomes machine behaviour, and the maths that sit behind it.
                         </p>
 
                         <div class="flex flex-col gap-3">
@@ -200,17 +252,24 @@ const initials = name.split(" ").map((p) => p[0]).join("");
                 </div>
 
                 <ul class="grid grid-cols-2 gap-4 w-full">
-                    {links.map(link => (
-                        <li class="group relative p-6 rounded-2xl border border-zinc-700/40 bg-black/60 hover:border-zinc-400 hover:bg-zinc-900/50 transition-all duration-300 cursor-pointer text-center reveal">
-                            <span class="block text-zinc-400 group-hover:text-white font-medium transition-colors">
-                                {link.label}
-                            </span>
-                            <span class="text-[10px] text-zinc-600 uppercase tracking-wider group-hover:text-zinc-400 transition-colors">
-                                {link.sub}
-                            </span>
-                            <a href={link.url} target="_blank" rel="noopener noreferrer" class="absolute inset-0 rounded-2xl" aria-label={`${link.label}: ${link.sub}`}></a>
-                        </li>
-                    ))}
+                    {links.map(link => {
+                        const Icon = link.icon;
+                        return (
+                            <li class="group relative p-6 rounded-2xl border border-zinc-700/40 bg-black/60 hover:border-zinc-400 hover:bg-zinc-900/50 transition-all duration-300 cursor-pointer flex flex-col items-center justify-center gap-2 text-center reveal">
+                                {Icon ? (
+                                    <Icon class={`size-6 text-zinc-400 group-hover:text-white transition-colors ${link.label !== 'Email' ? 'fill-current' : ''}`} />
+                                ) : (
+                                    <svg class="size-6 fill-current text-zinc-400 group-hover:text-white transition-colors" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                    </svg>
+                                )}
+                                <span class="text-[10px] text-zinc-600 uppercase tracking-wider group-hover:text-zinc-400 transition-colors">
+                                    {link.sub}
+                                </span>
+                                <a href={link.url} target="_blank" rel="noopener noreferrer" class="absolute inset-0 rounded-2xl" aria-label={`${link.label}: ${link.sub}`}></a>
+                            </li>
+                        );
+                    })}
                 </ul>
             </section>
 
@@ -222,37 +281,14 @@ const initials = name.split(" ").map((p) => p[0]).join("");
         <script>
             const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            // ── Animated background ──
-            const canvas = document.getElementById('bg-canvas') as HTMLCanvasElement | null;
-            const ctx = canvas?.getContext('2d');
-            let time = 0;
+            // ── Animated gradient background (colours are set in the CSS above) ──
+            import { Gradient } from '../scripts/gradient.js';
 
-            function resize() {
-                if (!canvas) return;
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-
-            function draw() {
-                if (!ctx || !canvas) return;
-                const shift = Math.sin(time) * 40;
-                const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-                gradient.addColorStop(0, `hsl(${225 + shift}, 55%, 14%)`);
-                gradient.addColorStop(0.5, `hsl(${285 + shift}, 45%, 9%)`);
-                gradient.addColorStop(1, `hsl(${205 + shift}, 35%, 5%)`);
-                ctx.fillStyle = gradient;
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-            }
-
-            function animate() {
-                draw();
-                time += 0.004;
-                requestAnimationFrame(animate);
-            }
-
-            resize();
-            window.addEventListener('resize', () => { resize(); draw(); });
-            if (reduceMotion) draw(); else animate();
+            const gradient = new Gradient();
+            // @ts-ignore
+            gradient.initGradient('#gradient-canvas');
+            // Visitors who prefer reduced motion get a still frame instead of the animation.
+            if (reduceMotion) setTimeout(() => gradient.pause(), 600);
 
             // ── Scroll reveal ──
             const items = document.querySelectorAll<HTMLElement>('.reveal');
