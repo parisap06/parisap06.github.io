@@ -7,10 +7,10 @@ I spend my days learning why things work, not just how to build them.
 
 ## Currently diving into
 
-- C++ Programming and Principles
-- Computer Architecture
-- Linear Algebra
-- Discrete Mathematics
+- Data Structures
+- Object-Oriented Programming
+- Probabilities
+- Theory of Computation
 
 ## Built with
 
